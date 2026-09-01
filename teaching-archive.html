@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Political Science — Teaching Archive (Template)</title>
+<style>
+  :root{
+    --paper: #F3EEE1;
+    --card: #FBF8EF;
+    --ink: #23303B;
+    --ink-soft: #56626C;
+    --folder: #C9A15A;
+    --folder-dark: #9C7A3C;
+    --stamp: #9C3B2E;
+    --line: #D8CFB6;
+    --sidebar: #23303B;
+    --sidebar-text: #DCE2E6;
+    --sidebar-muted: #8C99A3;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    line-height:1.5;
+  }
+  .label{
+    font-family: "Courier New", Courier, monospace;
+    font-size:0.72rem;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+  }
+  a{ color: var(--stamp); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+
+  .layout{ display:flex; min-height:100vh; }
+
+  /* ---- Sidebar: the "cabinet" of courses ---- */
+  .cabinet{
+    width:270px;
+    flex-shrink:0;
+    background:var(--sidebar);
+    color:var(--sidebar-text);
+    padding:28px 20px;
+  }
+  .cabinet h1{
+    font-size:1.05rem;
+    font-weight:600;
+    margin:0 0 2px;
+    line-height:1.3;
+  }
+  .cabinet .dept-tag{
+    color:var(--sidebar-muted);
+    font-size:0.82rem;
+    margin-bottom:28px;
+  }
+  .cabinet nav{ display:flex; flex-direction:column; gap:2px; }
+  .drawer-label{
+    font-family:"Courier New", Courier, monospace;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    color:var(--sidebar-muted);
+    margin:18px 0 8px;
+  }
+  .course-btn{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    color:var(--sidebar-text);
+    font-family:inherit;
+    font-size:0.92rem;
+    padding:9px 10px;
+    border-radius:3px;
+    cursor:pointer;
+    border-left:3px solid transparent;
+  }
+  .course-btn:hover{ background:rgba(255,255,255,0.06); }
+  .course-btn.active{
+    background:rgba(201,161,90,0.16);
+    border-left:3px solid var(--folder);
+    color:#fff;
+  }
+  .course-btn .code{
+    display:block;
+    font-family:"Courier New", Courier, monospace;
+    font-size:0.7rem;
+    color:var(--sidebar-muted);
+  }
+
+  /* ---- Main ---- */
+  main{ flex:1; padding:40px 48px 80px; max-width:920px; }
+
+  .course-head{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:18px;
+    margin-bottom:22px;
+  }
+  .course-head .label{ margin-bottom:6px; }
+  .course-head h2{
+    font-size:1.9rem;
+    margin:0 0 6px;
+  }
+  .course-head p{
+    color:var(--ink-soft);
+    max-width:62ch;
+    margin:0;
+  }
+
+  .cohort-switch{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:20px 0 28px;
+    flex-wrap:wrap;
+  }
+  .cohort-switch .label{ margin-right:4px; }
+  .cohort-chip{
+    font-family:"Courier New", Courier, monospace;
+    font-size:0.78rem;
+    padding:5px 11px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--card);
+    cursor:pointer;
+    color:var(--ink-soft);
+  }
+  .cohort-chip.active{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:#fff;
+  }
+
+  .week-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    margin-bottom:14px;
+    padding:16px 20px;
+    position:relative;
+  }
+  .week-card::before{
+    content:"";
+    position:absolute;
+    top:-1px; left:20px;
+    width:46px; height:6px;
+    background:var(--folder);
+    border-radius:0 0 3px 3px;
+  }
+  .week-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .week-row .week-no{
+    font-family:"Courier New", Courier, monospace;
+    font-size:0.78rem;
+    color:var(--folder-dark);
+    min-width:58px;
+  }
+  .week-row h3{
+    font-size:1.08rem;
+    margin:0;
+    flex:1;
+  }
+  .assets{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px dashed var(--line);
+  }
+  .asset{
+    font-size:0.84rem;
+    padding:4px 10px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:#fff;
+  }
+  .asset.missing{
+    color:var(--ink-soft);
+    border-style:dashed;
+    background:transparent;
+  }
+
+  .framework-section{
+    margin-top:52px;
+    padding-top:28px;
+    border-top:2px solid var(--ink);
+  }
+  .framework-section h2{ font-size:1.3rem; margin:0 0 6px; }
+  .framework-section > p{ color:var(--ink-soft); max-width:62ch; margin:0 0 20px; }
+  .framework-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .framework-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:14px 18px;
+  }
+  .framework-card .label{ margin-bottom:4px; }
+  .framework-card h4{ margin:0 0 6px; font-size:1rem; }
+  .framework-card p{ margin:0; color:var(--ink-soft); font-size:0.9rem; }
+
+  .agent-note{
+    margin-top:52px;
+    padding:18px 20px;
+    border:1px dashed var(--line);
+    border-radius:4px;
+    background:var(--card);
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  .agent-note .label{ margin-bottom:6px; }
+  .agent-note code{
+    font-family:"Courier New", Courier, monospace;
+    background:var(--paper);
+    padding:1px 5px;
+    border-radius:2px;
+    color:var(--ink);
+  }
+
+  @media (max-width: 760px){
+    .layout{ flex-direction:column; }
+    .cabinet{ width:100%; padding:20px; }
+    .cabinet nav{ flex-direction:row; overflow-x:auto; gap:8px; }
+    .course-btn{ width:auto; white-space:nowrap; border-left:none; border-bottom:3px solid transparent; }
+    .course-btn.active{ border-left:none; border-bottom:3px solid var(--folder); }
+    .drawer-label{ display:none; }
+    main{ padding:28px 20px 60px; }
+    .framework-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="cabinet">
+    <h1>Department of Political Science</h1>
+    <div class="dept-tag">Teaching archive — template preview</div>
+
+    <nav id="course-nav">
+      <div class="drawer-label">CORE COURSES</div>
+      <button class="course-btn active" data-course="comp-pol">
+        Comparative Politics
+        <span class="code">POLS 2103</span>
+      </button>
+      <button class="course-btn" data-course="ir-theory">
+        International Relations Theory
+        <span class="code">POLS 3210</span>
+      </button>
+      <button class="course-btn" data-course="pol-econ">
+        Political Economy of Development
+        <span class="code">POLS 3315</span>
+      </button>
+    </nav>
+  </aside>
+
+  <main>
+
+    <!-- ===== Course view ===== -->
+    <section class="course-head">
+      <div class="label">POLS 2103 · CORE COURSE</div>
+      <h2>Comparative Politics</h2>
+      <p>Institutions, regime change, and state formation across cases. Materials below are organised by teaching week and tagged by cohort, so a lecturer can reuse or adapt a prior semester's framework rather than rebuilding it from scratch.</p>
+    </section>
+
+    <div class="cohort-switch">
+      <span class="label">COHORT</span>
+      <button class="cohort-chip active">2026/27 Sem 1</button>
+      <button class="cohort-chip">2025/26 Sem 2</button>
+      <button class="cohort-chip">2025/26 Sem 1</button>
+    </div>
+
+    <div class="week-card">
+      <div class="week-row">
+        <span class="week-no">WK 03</span>
+        <h3>Path Dependence &amp; Critical Junctures</h3>
+      </div>
+      <div class="assets">
+        <a class="asset" href="#">📄 Lecture notes (PDF)</a>
+        <a class="asset" href="#">💬 Discussion plan (PDF)</a>
+        <a class="asset" href="#">📚 Reading list</a>
+        <span class="asset missing">🎥 recording — not uploaded</span>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-row">
+        <span class="week-no">WK 04</span>
+        <h3>Regime Typologies: Beyond Democracy vs. Autocracy</h3>
+      </div>
+      <div class="assets">
+        <a class="asset" href="#">📄 Lecture notes (PDF)</a>
+        <a class="asset" href="#">💬 Discussion plan (PDF)</a>
+        <a class="asset" href="#">🗂️ Case briefing pack</a>
+      </div>
+    </div>
+
+    <div class="week-card">
+      <div class="week-row">
+        <span class="week-no">WK 05</span>
+        <h3>State Capacity &amp; Bureaucratic Autonomy</h3>
+      </div>
+      <div class="assets">
+        <a class="asset" href="#">📄 Lecture notes (PDF)</a>
+        <span class="asset missing">💬 discussion plan — not uploaded</span>
+        <a class="asset" href="#">📚 Reading list</a>
+      </div>
+    </div>
+
+    <!-- ===== Department-wide shared frameworks ===== -->
+    <section class="framework-section">
+      <h2>Shared Frameworks</h2>
+      <p>Reusable material that isn't tied to one course — a lecturer publishes here once, and every course that touches the topic can point to it instead of duplicating a slide deck.</p>
+      <div class="framework-grid">
+        <div class="framework-card">
+          <div class="label">FRAMEWORK · METHODS</div>
+          <h4>Process Tracing: A Working Checklist</h4>
+          <p>Shared across Comparative Politics and IR Theory sections.</p>
+        </div>
+        <div class="framework-card">
+          <div class="label">FRAMEWORK · THEORY</div>
+          <h4>Reading Political Economy Texts Critically</h4>
+          <p>Referenced by Political Economy of Development, Weeks 2–6.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Note on agent/machine access ===== -->
+    <div class="agent-note">
+      <div class="label">FOR LATER — MACHINE-READABLE ACCESS</div>
+      Each item above can carry a matching entry in a small JSON index (course, week, cohort, type, file link). That's what lets a student's AI agent, or a chatbot on the faculty site, answer "what did Week 4 of Comparative Politics cover last semester?" by reading the index rather than guessing. Nothing on this preview page depends on that yet — it's a next step once the content itself is flowing in.
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // Preview-only interactivity: swapping the active course/cohort button.
+  // A real build would swap in that course's actual week cards.
+  document.querySelectorAll('.course-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.course-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.cohort-chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.cohort-chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
