@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Your Name — Portfolio</title>
+  <meta name="description" content="Personal portfolio showcasing projects, writing, and contact information.">
+  <link rel="stylesheet" href="portfolio_styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Your Name",
+    "url": "https://your-username.github.io/",
+    "sameAs": ["https://twitter.com/yourhandle"]
+  }
+  </script>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Your Name</h1>
+      <p class="tag">Researcher • Writer • Builder</p>
+      <p class="cta">Selected work, writing, and reproducible code.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Project One</h3>
+          <p>Short description. <a href="#">Demo</a> • <a href="#">Code</a></p>
+        </article>
+        <article class="card">
+          <h3>Project Two</h3>
+          <p>Short description. <a href="#">Demo</a> • <a href="#">Code</a></p>
+        </article>
+        <article class="card">
+          <h3>Project Three</h3>
+          <p>Short description. <a href="#">Demo</a> • <a href="#">Code</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>Brief bio, research interests, pronouns, and contact preference.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <form id="contact-form">
+        <label>Name<input name="name" required></label>
+        <label>Email<input name="email" type="email" required></label>
+        <label>Message<textarea name="message" rows="4"></textarea></label>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>Built with GitHub Pages • <a href="https://github.com/your-username">GitHub</a></p>
+  </footer>
+
+  <script src="portfolio_script.js"></script>
+</body>
+</html>
