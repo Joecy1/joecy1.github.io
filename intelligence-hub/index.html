@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alumni Intelligence Hub — Physical AI Map</title>
+  <meta name="description" content="A draft relationship explorer for research, industry, capital and deployment ecosystems.">
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">ALUMNI INTELLIGENCE HUB · DRAFT</p>
+      <h1>Physical AI ecosystem explorer</h1>
+      <p class="lede">Explore the connections between policy, research, capital, platforms and industrial deployment.</p>
+    </div>
+    <a class="back" href="../index.html">← Portfolio home</a>
+  </header>
+
+  <main class="layout">
+    <section class="stage-card" aria-label="3D relationship explorer">
+      <div id="canvas-wrap"><div id="loading">Loading graph…</div></div>
+      <div class="legend" id="legend"></div>
+    </section>
+    <aside class="side-panel">
+      <label for="search">Find a node</label>
+      <input id="search" type="search" placeholder="NIST, Figure, robotics…">
+      <label for="kind-filter">Filter by type</label>
+      <select id="kind-filter"><option value="all">All types</option></select>
+      <button id="reset" type="button">Reset view</button>
+      <div class="hint">Drag to rotate · scroll to zoom · click a node for evidence and relationships.</div>
+      <article id="details" class="details empty">
+        <h2>Select a node</h2>
+        <p>The detail panel will show the node's role, score, confidence and connected organisations.</p>
+      </article>
+    </aside>
+  </main>
+
+  <footer><span>Draft data is a research scaffold, not a definitive ranking.</span><a href="./data/graph.json">Open graph JSON</a></footer>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js"
+    }
+  }
+  </script>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
